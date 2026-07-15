@@ -1,11 +1,11 @@
-package com.craftinginterpreters.jlox;
+package lox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.craftinginterpreters.jlox.TokenType.*;
+import static lox.TokenType.*;
 
 class Scanner
 {
@@ -117,9 +117,9 @@ class Scanner
 		case '\r':
 		case '\t':
 			break;
-		case '\n';
+		case '\n':
 			line++;
-			break
+			break;
 		case '"':
 			string();
 			break;
@@ -182,7 +182,7 @@ class Scanner
 		if (isAtEnd())
 		{
 			Lox.error(line, "Unterminated string.");
-			return
+			return;
 		}	// if
 
 		// The closing "
@@ -249,7 +249,7 @@ class Scanner
 	private void addToken(TokenType type, Object literal)
 	{
 		String text = source.substring(start, current);
-		tokens.add(new Token(tupe, text, literal, line));
+		tokens.add(new Token(type, text, literal, line));
 	}	// addToken
 
 }	// Scanner
